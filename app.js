@@ -26,13 +26,13 @@ app.get("/recommend",function(req,res){
 });
 // yes you can define get & post for the same route but no 2 gets or 2 posts
 app.post('/recommend',function(req,res){
-const restaurant = req.body.name;
+const restaurant = req.body;
    const filePath = path.join(__dirname,"data",'restaurants.json');
    const fileData =fs.readFileSync(filePath);//1st read the data that is alrady in the file
    const storedRestaurants = JSON.parse(fileData);//parsing this data into a js array
     storedRestaurants.push(restaurant);//2nd add the new element to the array that has been read
     fs.writeFileSync(filePath,JSON.stringify(storedRestaurants));//3rd is rewriting the file but with the new data , hint : stringify turns the js array into a text 
-    res
+    res.redirect('/confirm');
 });
 
 app.get("/confirm",function(req,res){

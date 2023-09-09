@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "name": "Test",
+    "address": "Teststreet 5 , Testcity",
+    "cuisine": "Italian",
+    "website": "htttps://mytest.com",
+    "description": "it's awesome!"
+  }
+]
