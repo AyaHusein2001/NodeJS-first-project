@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('includes/head') %>
+    <link rel="stylesheet" href="/styles/restaurants.css" />
+  </head>
+  <body>
+  <!-- including the header file using ejs special syntax -->
+  <%- include('includes/header') %><!-- note! without the extension , you can pass any arguements like this : 
+  include('includes/header',{nrests: ...})
+  -->
+  <%- include('includes/side-drawer') %>
+    <main>
+      <h1><%= restaurant.name %></h1>
+      <p><%= restaurant.cuisine %> | <%= restaurant.address %></p>
+     <p><%= restaurant.description %></p>
+     <p><a href="<%= restaurant.website %>">view Website</a></p>
+     
+    </main>
+  </body>
+</html>

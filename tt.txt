@@ -1,0 +1,45 @@
+Application Information (1)
+----------------------------------------------
+Submitter
+PI Name
+PI Email
+Academic Unit
+Program
+Research & Innovation Unit
+Coordinator
+University Name
+University Country
+RCD Decider
+Call Category
+//Other Call Category
+Call Link
+Proposal Title
+Project Description
+Funding Agency
+//Other Funding Agency
+Project Duration
+Project Type
+Estimated Project Budget
+Currency
+Other Currency
+Estimated NU Share
+Security Clearance
+Require Other Documents
+Document Type Yes
+Document Type Maybe
+IAPSubmail
+PIUserName
+PISubmission
+Sign Decider
+Matching Fund
+Matching Fund Description
+Academics
+Academics Description
+Space
+Space Description
+Facilities
+Facilities Description
+Significant
+Significant Description
+Other
+Other Description

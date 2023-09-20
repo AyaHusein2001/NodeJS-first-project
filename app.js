@@ -2,9 +2,13 @@ const express = require("express"); // npm install express , nodemon , you
 //can take package.json and run npm install
 // starts the server with npm start
 const path = require("path");
-const fs = require("fs");
+//importing a file
+const defaultRoutes=require('./routes/default');
+const restaurantRoutes=require('./routes/restaurants');
+
 
 const app = express();
+
 // tells ejs where the views are stored
 app.set("views", path.join(__dirname, "views"));
 
@@ -16,55 +20,32 @@ app.use(express.static("public")); // for every incoming request , if this reque
 // turn all text in form to js objects
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", function (req, res) {
-  // const htmlFilePath = path.join(__dirname,"views",'index.html');
-  // res.sendFile(htmlFilePath);
+// this tells express that every route starts with a / should be handeled with this default routes
+// this also means that every incoming request will go throght this default routes , and if there is a match in this file it is ok , if there is no , it will
+// come back here again
+app.use('/',defaultRoutes);
+// if you haven't found them in default routes , go search for them in 
+// restaurant roues
+app.use('/',restaurantRoutes);
 
-  //instead of html , we will use render that renders a template
-  res.render("index");
+
+// this is put here because I don't want it to be executed except when
+//the route entered is not anyone of the previous routes
+app.use(function(req,res){
+  /* note that : status returns an updated response */
+  // I wanna set the status code of the response to indicate a failue before loading the oage
+  res.status(404).render('404');
 });
 
-app.get("/restaurants", function (req, res) {
-  // const htmlFilePath = path.join(__dirname,"views",'restaurants.html');
-  // res.sendFile(htmlFilePath);
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-  const fileData = fs.readFileSync(filePath);
-  const storedRestaurants = JSON.parse(fileData);
-  res.render("restaurants", {
-    numberOfRestaurants: storedRestaurants.length,
-    restaurants: storedRestaurants,
-  });
-});
 
-app.get("/recommend", function (req, res) {
-  // const htmlFilePath = path.join(__dirname,"views",'recommend.html');
-  // res.sendFile(htmlFilePath);
+/*
+the function passed to use here must have these 4 parameters 
+to make express understand that this is the function that will be 
+used to handle server-side error
+*/
+app.use(function(error, req , res , next){
+  res.status(500).render('500');
 
-  res.render("recommend");
-});
-// yes you can define get & post for the same route but no 2 gets or 2 posts
-app.post("/recommend", function (req, res) {
-  const restaurant = req.body;
-  const filePath = path.join(__dirname, "data", "restaurants.json");
-  const fileData = fs.readFileSync(filePath); //1st read the data that is alrady in the file
-  const storedRestaurants = JSON.parse(fileData); //parsing this data into a js array
-  storedRestaurants.push(restaurant); //2nd add the new element to the array that has been read
-  fs.writeFileSync(filePath, JSON.stringify(storedRestaurants)); //3rd is rewriting the file but with the new data , hint : stringify turns the js array into a text
-  res.redirect("/confirm");
-});
-
-app.get("/confirm", function (req, res) {
-  // const htmlFilePath = path.join(__dirname,"views",'confirm.html');
-  // res.sendFile(htmlFilePath);
-
-  res.render("confirm");
-});
-
-app.get("/about", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "about.html");
-  res.sendFile(htmlFilePath);
-
-  res.render("about");
 });
 
 app.listen(3000);

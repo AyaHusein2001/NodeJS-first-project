@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <%- include('includes/head') %>
-    <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
     <!-- including the header file using ejs special syntax -->
@@ -10,19 +9,13 @@
     include('includes/header',{nrests: ...})
     -->
     <%- include('includes/side-drawer') %>
+    
     <main>
-      <h1>Make the world a tastier place!</h1>
+      <h1>Page not Found</h1>
       <p>
-        Share your favorite restaurants or find recommendations of other users!
+        Unfortunately, we weren't able to find this page .
       </p>
-      <ul id="actions">
-        <li>
-          <a href="/restaurants">Browse Shared Restaurants</a>
-        </li>
-        <li>
-          <a href="/recommend">Share Your Favorite Restaurant</a>
-        </li>
-      </ul>
+      
     </main>
   </body>
 </html>
